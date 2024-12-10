@@ -5,12 +5,17 @@ interface TaskProps {
   id: number;
   title: string;
   completed: boolean;
-  onToggle: (id: number) => void;
+  onToggle: (id: number, newStatus: boolean) => void;
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
 }
 
 const Task: React.FC<TaskProps> = ({ id, title, completed, onToggle, onEdit, onDelete }) => {
+  // Cambiar el estado al hacer clic en el checkbox
+  const handleToggle = () => {
+    onToggle(id, !completed); // Cambiar el estado de completed a su valor opuesto
+  };
+
   return (
     <li className="flex items-center justify-between px-4 py-2 border rounded hover:bg-gray-50">
       <div className="flex items-center space-x-4">
@@ -19,7 +24,7 @@ const Task: React.FC<TaskProps> = ({ id, title, completed, onToggle, onEdit, onD
           <input
             type="checkbox"
             checked={completed}
-            onChange={() => onToggle(id)}
+            onChange={handleToggle} // Llamada a handleToggle cuando cambia el estado
             id={`checkbox-${id}`}
             className="peer hidden"
           />

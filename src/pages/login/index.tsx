@@ -23,7 +23,7 @@ const LoginPage = () => {
       localStorage.setItem('user', JSON.stringify(user));
 
       // Redirige al home
-      router.push('/dashboard');
+      router.push('/tasks');
     } catch (err) {
       setError((err as Error).message);
     } finally {
